@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4c568126-dfe3-4d95-832c-4a3de72024ae}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{239cb20b-c170-4179-a44d-f0655e29b0af}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{8a040c84-9f15-457f-bb21-4057971b5b23}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Header Files\对话框">
+      <UniqueIdentifier>{70beab63-6efc-4719-adfd-b85493eb3bec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\对话框">
+      <UniqueIdentifier>{1f5624ed-f4f5-4aa2-a1ee-1b4075bcd7d6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ChildFrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CqOctree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dibapi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageProcessDoc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageProcessView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StdAfx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EmbossmentDlg.cpp">
+      <Filter>Source Files\对话框</Filter>
+    </ClCompile>
+    <ClCompile Include="SpreadDlg.cpp">
+      <Filter>Source Files\对话框</Filter>
+    </ClCompile>
+    <ClCompile Include="ConvoluteDlg.cpp">
+      <Filter>Source Files\对话框</Filter>
+    </ClCompile>
+    <ClCompile Include="ZoomDlg.cpp">
+      <Filter>Source Files\对话框</Filter>
+    </ClCompile>
+    <ClCompile Include="LogTranDlg.cpp">
+      <Filter>Source Files\对话框</Filter>
+    </ClCompile>
+    <ClCompile Include="PreviewDlg.cpp">
+      <Filter>Source Files\对话框</Filter>
+    </ClCompile>
+    <ClCompile Include="ThresholdDlg.cpp">
+      <Filter>Source Files\对话框</Filter>
+    </ClCompile>
+    <ClCompile Include="scbarg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sizecbar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StretchDlg.cpp">
+      <Filter>Source Files\对话框</Filter>
+    </ClCompile>
+    <ClCompile Include="HistogramDlg.cpp">
+      <Filter>Source Files\对话框</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ChildFrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dibapi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageProcessDoc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageProcessView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StdAfx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConvoluteDlg.h">
+      <Filter>Header Files\对话框</Filter>
+    </ClInclude>
+    <ClInclude Include="EmbossmentDlg.h">
+      <Filter>Header Files\对话框</Filter>
+    </ClInclude>
+    <ClInclude Include="SpreadDlg.h">
+      <Filter>Header Files\对话框</Filter>
+    </ClInclude>
+    <ClInclude Include="ZoomDlg.h">
+      <Filter>Header Files\对话框</Filter>
+    </ClInclude>
+    <ClInclude Include="LogTranDlg.h">
+      <Filter>Header Files\对话框</Filter>
+    </ClInclude>
+    <ClInclude Include="PreviewDlg.h">
+      <Filter>Header Files\对话框</Filter>
+    </ClInclude>
+    <ClInclude Include="ThresholdDlg.h">
+      <Filter>Header Files\对话框</Filter>
+    </ClInclude>
+    <ClInclude Include="marco.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scbarg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sizecbar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StretchDlg.h">
+      <Filter>Header Files\对话框</Filter>
+    </ClInclude>
+    <ClInclude Include="HistogramDlg.h">
+      <Filter>Header Files\对话框</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\ImageProcess.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\ImageProcessDoc.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Toolbar.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="res\ImageProcess.rc2">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ImageProcess.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
