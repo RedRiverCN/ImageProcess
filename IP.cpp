@@ -175,9 +175,9 @@ KERNEL Sobel[2] = {
 		1                             // Divisor = 1
 	},
 	{                    // Sobel2
-		{1, 2, 1,
+		{-1,-2,-1,
 		  0,  0,  0,
-		-1,-2,-1},
+		1, 2, 1},
 		1                             // Divisor = 1
 	}
 };
@@ -200,6 +200,9 @@ KERNEL Hough[2] = {
 // local use macro
 #define PIXEL_OFFSET(i, j, nWidthBytes)	\
 		(LONG)((LONG)(i)*(LONG)(nWidthBytes) + (LONG)(j)*3)
+
+#define PIXEL_OFFSET_8(i, j, nWidthBytes)	\
+		(LONG)((LONG)(i)*(LONG)(nWidthBytes) + (LONG)(j))
 
 // local function prototype
 int compare(const void *e1, const void *e2);
@@ -2599,31 +2602,31 @@ BOOL EdegeDetectDIB(HDIB hDib, KERNEL *lpKernel)
 			gx = gy = 0;
 
 			BYTE b[9];
-			lOffset= PIXEL_OFFSET(i-1,j-1, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i-1,j-1, wBytesPerLine);
 			b[0] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i-1,j, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i-1,j, wBytesPerLine);
 			b[1] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i-1,j+1, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i-1,j+1, wBytesPerLine);
 			b[2] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i,j-1, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i,j-1, wBytesPerLine);
 			b[3] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i,j, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i,j, wBytesPerLine);
 			b[4] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i,j+1, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i,j+1, wBytesPerLine);
 			b[5] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i+1,j-1, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i+1,j-1, wBytesPerLine);
 			b[6] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i+1,j, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i+1,j, wBytesPerLine);
 			b[7] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i+1,j+1, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i+1,j+1, wBytesPerLine);
 			b[8] = *(lpDIBits + lOffset);
 
 			for (int k=0; k<=8; ++k)
@@ -2636,7 +2639,7 @@ BOOL EdegeDetectDIB(HDIB hDib, KERNEL *lpKernel)
 			g = min(fabs(gx) + fabs(gy), 255.0);	// approximation
 			if (g > maxV)
 				maxV = g;
-			lOffset= PIXEL_OFFSET(i,j, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i,j, wBytesPerLine);
 			*(lpDestImage + lOffset) = (BYTE) g;
 		}
 	}
@@ -2647,7 +2650,7 @@ BOOL EdegeDetectDIB(HDIB hDib, KERNEL *lpKernel)
 	{
 		for (j=1; j<wDIBWidth-1; j++) 
 		{
-			LONG lOffset= PIXEL_OFFSET(i, j, wBytesPerLine);
+			LONG lOffset= PIXEL_OFFSET_8(i, j, wBytesPerLine);
 			double value = (double)*(lpDestImage + lOffset) * ratio;
 			*(lpDestImage + lOffset) = BYTE(int(value+0.5));
 		}
@@ -2744,31 +2747,31 @@ BOOL HomogenityEdegeDetectDIB(HDIB hDib)
 			maxV = 0;
 
 			BYTE b[9];
-			lOffset= PIXEL_OFFSET(i-1,j-1, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i-1,j-1, wBytesPerLine);
 			b[0] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i-1,j, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i-1,j, wBytesPerLine);
 			b[1] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i-1,j+1, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i-1,j+1, wBytesPerLine);
 			b[2] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i,j-1, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i,j-1, wBytesPerLine);
 			b[3] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i,j, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i,j, wBytesPerLine);
 			b[4] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i,j+1, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i,j+1, wBytesPerLine);
 			b[5] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i+1,j-1, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i+1,j-1, wBytesPerLine);
 			b[6] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i+1,j, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i+1,j, wBytesPerLine);
 			b[7] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i+1,j+1, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i+1,j+1, wBytesPerLine);
 			b[8] = *(lpDIBits + lOffset);
 
 			for (int k=0; k<=8; ++k)
@@ -2783,7 +2786,7 @@ BOOL HomogenityEdegeDetectDIB(HDIB hDib)
 				}
 			}
 
-			lOffset= PIXEL_OFFSET(i,j, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i,j, wBytesPerLine);
 			*(lpDestImage + lOffset) = (BYTE)maxV;
 		}
 	}
@@ -2854,31 +2857,31 @@ BOOL DifferenceEdegeDetectDIB(HDIB hDib)
 			maxV = 0;
 
 			BYTE b[9];
-			lOffset= PIXEL_OFFSET(i-1,j-1, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i-1,j-1, wBytesPerLine);
 			b[0] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i-1,j, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i-1,j, wBytesPerLine);
 			b[1] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i-1,j+1, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i-1,j+1, wBytesPerLine);
 			b[2] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i,j-1, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i,j-1, wBytesPerLine);
 			b[3] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i,j, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i,j, wBytesPerLine);
 			b[4] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i,j+1, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i,j+1, wBytesPerLine);
 			b[5] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i+1,j-1, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i+1,j-1, wBytesPerLine);
 			b[6] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i+1,j, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i+1,j, wBytesPerLine);
 			b[7] = *(lpDIBits + lOffset);
 
-			lOffset= PIXEL_OFFSET(i+1,j+1, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i+1,j+1, wBytesPerLine);
 			b[8] = *(lpDIBits + lOffset);
 
 			// left diagonal
@@ -2906,7 +2909,7 @@ BOOL DifferenceEdegeDetectDIB(HDIB hDib)
 			if (d > maxV)
 				maxV = d;
 
-			lOffset= PIXEL_OFFSET(i,j, wBytesPerLine);
+			lOffset= PIXEL_OFFSET_8(i,j, wBytesPerLine);
 			*(lpDestImage + lOffset) = (BYTE)maxV;
 		}
 	}
@@ -3057,9 +3060,9 @@ BOOL CannyEdegeDetectDIB(HDIB hDib)
 	GX[2][0] = -1; GX[2][1] = 0; GX[2][2] = 1;
 
 	// 3x3 GY Sobel mask.  Ref: www.cee.hw.ac.uk/hipr/html/sobel.html 
-	GY[0][0] =  1; GY[0][1] =  2; GY[0][2] =  1;
+	GY[0][0] = -1; GY[0][1] = -2; GY[0][2] = -1;
 	GY[1][0] =  0; GY[1][1] =  0; GY[1][2] =  0;
-	GY[2][0] = -1; GY[2][1] = -2; GY[2][2] = -1;
+	GY[2][0] = 1; GY[2][1] = 2; GY[2][2] = 1;
 
 	// copy to a new DIB to store original data
 	HDIB hNewDib = CopyHandle(hDib);
@@ -4531,12 +4534,255 @@ BOOL LocalImageEnhancementDIB(HDIB hDib)
 
 BOOL MyMedianFilterDIB(HDIB hDib)
 {
-	return 0;
+	WaitCursorBegin();
+
+	HDIB hNewDib = NULL;
+	// we only convolute 24bpp DIB, so first convert DIB to 24bpp
+	WORD wBitCount = DIBBitCount(hDib);
+	if (wBitCount != 24)
+		hNewDib = ConvertDIBFormat(hDib, 24, NULL);
+	else
+		hNewDib = CopyHandle(hDib);
+
+	if (!hNewDib)
+	{
+		WaitCursorEnd();
+		return FALSE;
+	}
+
+	// new DIB attributes
+	WORD wDIBWidth = (WORD)DIBWidth(hNewDib);
+	WORD wDIBHeight = (WORD)DIBHeight(hNewDib);
+	WORD wBytesPerLine = (WORD)BytesPerLine(hNewDib);
+	DWORD dwImageSize = wBytesPerLine * wDIBHeight;
+
+	// Allocate and lock memory for filtered image data
+	HGLOBAL hFilteredBits = GlobalAlloc(GHND, dwImageSize);
+	if (!hFilteredBits)
+	{
+		WaitCursorEnd();
+		return FALSE;
+	}
+	LPBYTE lpDestImage = (LPBYTE)GlobalLock(hFilteredBits);
+
+	// get bits address in DIB
+	LPBYTE lpDIB = (LPBYTE)GlobalLock(hNewDib);
+	LPBYTE lpDIBBits = FindDIBBits(lpDIB);
+
+	//为避免黑边，首先把原图复制过来，因为图像边缘是不处理的
+	memcpy(lpDestImage, lpDIBBits, dwImageSize);
+
+	// 主要处理部分==>3*3中值滤波
+	int  red = 0, green = 0, blue = 0;
+	BYTE b[9], g[9], r[9];
+	LONG lOffset;
+	for (int i = 1; i < wDIBHeight - 1; i++)
+		for (int j = 1; j < wDIBWidth - 1; j++)
+		{
+			lOffset = PIXEL_OFFSET(i - 1, j - 1, wBytesPerLine);
+			b[0] = *(lpDIBBits + lOffset++);
+			g[0] = *(lpDIBBits + lOffset++);
+			r[0] = *(lpDIBBits + lOffset);
+
+			lOffset = PIXEL_OFFSET(i - 1, j, wBytesPerLine);
+			b[1] = *(lpDIBBits + lOffset++);
+			g[1] = *(lpDIBBits + lOffset++);
+			r[1] = *(lpDIBBits + lOffset);
+
+			lOffset = PIXEL_OFFSET(i - 1, j + 1, wBytesPerLine);
+			b[2] = *(lpDIBBits + lOffset++);
+			g[2] = *(lpDIBBits + lOffset++);
+			r[2] = *(lpDIBBits + lOffset);
+
+			lOffset = PIXEL_OFFSET(i, j - 1, wBytesPerLine);
+			b[3] = *(lpDIBBits + lOffset++);
+			g[3] = *(lpDIBBits + lOffset++);
+			r[3] = *(lpDIBBits + lOffset);
+
+			lOffset = PIXEL_OFFSET(i, j, wBytesPerLine);
+			b[4] = *(lpDIBBits + lOffset++);
+			g[4] = *(lpDIBBits + lOffset++);
+			r[4] = *(lpDIBBits + lOffset);
+
+			lOffset = PIXEL_OFFSET(i, j + 1, wBytesPerLine);
+			b[5] = *(lpDIBBits + lOffset++);
+			g[5] = *(lpDIBBits + lOffset++);
+			r[5] = *(lpDIBBits + lOffset);
+
+			lOffset = PIXEL_OFFSET(i + 1, j - 1, wBytesPerLine);
+			b[6] = *(lpDIBBits + lOffset++);
+			g[6] = *(lpDIBBits + lOffset++);
+			r[6] = *(lpDIBBits + lOffset);
+
+			lOffset = PIXEL_OFFSET(i + 1, j, wBytesPerLine);
+			b[7] = *(lpDIBBits + lOffset++);
+			g[7] = *(lpDIBBits + lOffset++);
+			r[7] = *(lpDIBBits + lOffset);
+
+			lOffset = PIXEL_OFFSET(i + 1, j + 1, wBytesPerLine);
+			b[8] = *(lpDIBBits + lOffset++);
+			g[8] = *(lpDIBBits + lOffset++);
+			r[8] = *(lpDIBBits + lOffset);
+
+			qsort(r, 9, 1, compare);//快速排序从小到大
+			qsort(g, 9, 1, compare);
+			qsort(b, 9, 1, compare);
+
+			red = r[4];
+			green = g[4];
+			blue = b[4];
+
+			lOffset = PIXEL_OFFSET(i, j, wBytesPerLine);
+			*(lpDestImage + lOffset++) = BOUND(blue, 0, 255);
+			*(lpDestImage + lOffset++) = BOUND(green, 0, 255);
+			*(lpDestImage + lOffset) = BOUND(red, 0, 255);
+		}
+
+	// a filtered image is available in lpDestImage
+	// copy it to DIB bits
+	memcpy(lpDIBBits, lpDestImage, dwImageSize);
+
+	// cleanup temp buffers
+	GlobalUnlock(hFilteredBits);
+	GlobalFree(hFilteredBits);
+	GlobalUnlock(hNewDib);
+
+	// rebuild hDib
+	HDIB hTmp = NULL;
+	if (wBitCount != 24)
+		hTmp = ConvertDIBFormat(hNewDib, wBitCount, NULL);
+	else
+		hTmp = CopyHandle(hNewDib);
+	GlobalFree(hNewDib);
+	DWORD dwSize = GlobalSize(hTmp);
+	memcpy((LPBYTE)GlobalLock(hDib), (LPBYTE)GlobalLock(hTmp), dwSize);
+	GlobalUnlock(hTmp);
+	GlobalFree(hTmp);
+	GlobalUnlock(hDib);
+	WaitCursorEnd();
+
+	return TRUE;
 }
 
+//sobel算子
 BOOL SobleOperatorDIB(HDIB hDib)
 {
-	return 0;
+
+	WaitCursorBegin();
+
+	// 1. 先中值滤波
+	if (!MyMedianFilterDIB(hDib))
+	{
+		WaitCursorEnd();
+		return FALSE;
+	}
+
+	// 2. convert to gray scale
+	ConvertToGrayscale(hDib, MEAN_GRAY, 0, 0, 0);	
+	
+
+	WORD wDIBWidth = (WORD)DIBWidth(hDib);
+	WORD wDIBHeight = (WORD)DIBHeight(hDib);
+	WORD wBytesPerLine = (WORD)BytesPerLine(hDib);
+
+	// Allocate and lock memory for filtered image data
+	BYTE*  lpDIBBits = new BYTE[wBytesPerLine * wDIBHeight];
+
+	// original DIB become dest image
+	LPBYTE lpDestDIB = (LPBYTE)GlobalLock(hDib);
+	LPBYTE lpDestImage = FindDIBBits(lpDestDIB);
+
+	//为避免黑边，首先把原图复制过来，因为图像边缘是不处理的
+	memcpy(lpDIBBits, lpDestImage, wBytesPerLine * wDIBHeight);
+
+	// 3. detect...
+	int i, j;
+	LONG lOffset;
+	BYTE b[9];
+	double g, gx, gy, maxV = 0;
+	for (i = 1; i < wDIBHeight -1; i++)
+	{
+		for (j = 1; j < wDIBWidth - 1; j++)
+		{
+			gx = gy = 0;
+
+			lOffset = PIXEL_OFFSET_8(i - 1, j - 1, wBytesPerLine);
+			b[0] = *(lpDIBBits + lOffset);
+
+			lOffset = PIXEL_OFFSET_8(i - 1, j, wBytesPerLine);
+			b[1] = *(lpDIBBits + lOffset);
+
+			lOffset = PIXEL_OFFSET_8(i - 1, j + 1, wBytesPerLine);
+			b[2] = *(lpDIBBits + lOffset);
+
+			lOffset = PIXEL_OFFSET_8(i, j - 1, wBytesPerLine);
+			b[3] = *(lpDIBBits + lOffset);
+
+			lOffset = PIXEL_OFFSET_8(i, j, wBytesPerLine);
+			b[4] = *(lpDIBBits + lOffset);
+
+			lOffset = PIXEL_OFFSET_8(i, j + 1, wBytesPerLine);
+			b[5] = *(lpDIBBits + lOffset);
+
+			lOffset = PIXEL_OFFSET_8(i + 1, j - 1, wBytesPerLine);
+			b[6] = *(lpDIBBits + lOffset);
+
+			lOffset = PIXEL_OFFSET_8(i + 1, j, wBytesPerLine);
+			b[7] = *(lpDIBBits + lOffset);
+
+			lOffset = PIXEL_OFFSET_8(i + 1, j + 1, wBytesPerLine);
+			b[8] = *(lpDIBBits + lOffset);
+
+			KERNEL Sobel[2] = {
+				{                    // Sobel1
+					{ -1, 0, 1,
+					-2, 0, 2,
+					-1, 0, 1 },
+					1                             // Divisor = 1
+				},
+				{                    // Sobel2
+					{ -1,-2,-1,
+					0,  0,  0,
+					1, 2, 1 },
+					1                             // Divisor = 1
+				}
+			};
+
+			for (int k = 0; k <= 8; ++k)
+			{
+				gx += Sobel[0].Element[k] * b[k];
+				gy += Sobel[1].Element[k] * b[k];
+			}
+
+			//	 梯度值近似值
+			g = min(fabs(gx) + fabs(gy), 255.0);	
+			if (g > maxV)
+				maxV = g;
+
+			lOffset = PIXEL_OFFSET_8(i, j, wBytesPerLine);
+			*(lpDestImage + lOffset) = (BYTE)g;
+		}
+	}
+	
+	double ratio = 255.0 / (double)maxV;
+	double value;
+	for (i = 1; i < wDIBHeight - 1; i++)
+	{
+		for (j = 1; j < wDIBWidth - 1; j++)
+		{
+			lOffset = PIXEL_OFFSET_8(i, j, wBytesPerLine);
+			value = *(lpDestImage + lOffset) * ratio;
+			*(lpDestImage + lOffset) = (BYTE)(BOUND(int(value + 0.5), 0, 255));
+		}
+	}
+
+	// cleanup temp buffers
+	delete lpDIBBits;
+	GlobalUnlock(hDib);
+	
+	WaitCursorEnd();
+
+	return TRUE;
 }
 
 BOOL LaplacianSharpeningDIB(HDIB hDib)
